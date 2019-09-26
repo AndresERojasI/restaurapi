@@ -1,0 +1,177 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: RestaurAPI
+  description: Restaurant Reservation and Menu options API
+basePath: /api/v1
+tags:
+  - name: Examples
+    description: Simple example endpoints
+  - name: Specification
+    description: The swagger API specification
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+
+definitions:
+  ExampleBody:
+    type: object
+    title: reservation
+    required:
+      - phoneNumber
+      - name
+    properties:
+      phoneNumber:
+        type: string
+        example: +576546546
+      name:
+        type: string
+        example: John Doe
+      time:
+        type: string
+        example: 10:00 PM
+      guestCount:
+        type: number
+        example: 2
+      drinks:
+        type: array
+        example: ['Wine Glass', 'Lemonade']
+        items:
+          type: string
+      appetizers:
+        type: array
+        example: ['Beer Dip', 'Caprese Salad Kabobs']
+        items:
+          type: string
+      specials:
+        type: array
+        example: ['Caprese Salad Kabobs', 'Smoked Pork Jowl with Pickles']
+        items:
+          type: string
+
+paths:
+  /menu:
+    get:
+      tags:
+        - Menu
+      description: nothing here...
+      responses:
+        200:
+          description: nothing here
+  /menu/drinks:
+    get:
+      tags:
+        - Menu
+      description: Returns all available drinks
+      responses:
+        200:
+          description: returns a JSON with all the drinks
+
+  /menu/appetizers:
+    get:
+      tags:
+        - Menu
+      description: Returns all available drinks
+      responses:
+        200:
+          description: returns a JSON with all the drinks
+
+
+  /menu/specials:
+    get:
+      tags:
+        - Menu
+      description: Returns all available drinks
+      responses:
+        200:
+          description: returns a JSON with all the drinks
+  
+  /reservations:
+    get:
+      tags:
+        - Reservations
+      description: nothing here...
+      responses:
+        200:
+          description: returns a JSON with all the drinks
+    post:
+      tags:
+        - Reservations
+      description: Creates a new reservation
+      responses:
+        200:
+          description: Creates a new reservation and returns the reservation ID
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: reservation
+          description: Reservation to be created
+          schema:
+            type: object
+            required:
+              - phoneNumber
+              - name
+            properties:
+              phoneNumber:
+                type: string
+              name:
+                type: string
+              time:
+                type: string
+              guestCount:
+                type: number
+              drinks:
+                type: array
+                example: ['Wine Glass', 'Lemonade']
+                items:
+                  type: string
+              appetizers:
+                type: array
+                example: ['Beer Dip', 'Caprese Salad Kabobs']
+                items:
+                  type: string
+              specials:
+                type: array
+                example: ['Caprese Salad Kabobs', 'Smoked Pork Jowl with Pickles']
+                items:
+                  type: string
+  /reservations/{phoneNumber}:
+    get:
+      tags:
+        - Reservations
+      description: Gets the Reservation created with the Phone Number Provided
+      parameters:
+        - in: path
+          name: phoneNumber
+          schema:
+            type: integer
+          required: true
+          description: Phone Number used to create the reservation
+      responses:
+        200:
+          description: returns a list of all the available reservations by that number
+    delete:
+      tags:
+        - Reservations
+      description: Cancels the Reservation created with the Phone Number Provided
+      parameters:
+        - in: path
+          name: phoneNumber
+          schema:
+            type: integer
+          required: true
+          description: Phone Number used to create the reservation
+      responses:
+        200:
+          description: returns a json with success boolean
+  /spec:
+    get:
+      tags:
+        - Specification
+      responses:
+        200:
+          description: Return the API specification
