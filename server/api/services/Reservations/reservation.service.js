@@ -4,7 +4,7 @@ import database from '../../../common/database'
 class ReservationService {
     createReservation(reservation) {
         l.info(`${this.constructor.name}.createReservation()`);
-        return database.collection('reservations').set(reservation)
+        return database.collection('reservations').doc(`${reservation.phoneNumber}_${reservation.time}`).set(reservation)
     }
 
     getReservation(phoneNumber) {
