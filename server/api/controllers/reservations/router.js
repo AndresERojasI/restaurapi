@@ -7,6 +7,6 @@ export default express
     res.send('Oopsie! there is nothing here, stop snooping around')
   })
   .get('/:phoneNumber', controller.get)
-  .delete('/:phoneNumber/:time', controller.delete)
+  .delete('/:phoneNumber', controller.delete)
   .post('/', controller.create);
   
